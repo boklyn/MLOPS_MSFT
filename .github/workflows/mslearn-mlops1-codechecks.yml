@@ -2,7 +2,7 @@ name: pipelines-codechecks-mslearn-mlops1
 
 on:
   workflow_dispatch:
-  push:
+  pull:
     branches:
       - main
     paths:
