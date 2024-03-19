@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
 
-# define functions
+# define functions you know
 def main(args):
     # Log parameters and metrics using autologging
     mlflow.sklearn.autolog()
