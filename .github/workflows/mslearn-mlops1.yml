@@ -5,8 +5,8 @@
 
 name: pipelines-jobs-mslearn-mlops1
 on:
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   workflow_dispatch:
   #schedule:
   #  - cron: "4 6/12 * * *"
