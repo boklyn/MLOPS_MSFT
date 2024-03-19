@@ -1,7 +1,7 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: model
 command: >-
-  az ml data asset create --file-path ./data --name boklyn_mydata --description "My CSV data"
+  az ml data create --name boklyn_mydata --version 1 --type uri_folder --path ./data --description "My CSV data"
 inputs:
   training_data: None
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
