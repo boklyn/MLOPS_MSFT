@@ -43,10 +43,10 @@ jobs:
           bash setup.sh
       working-directory: cli
       continue-on-error: true
-    - name: load datasets
-      run: |
-          az ml data create --file mlops_dataset.yml
-      working-directory: cli/jobs/pipelines/mslearn-mlops
+#    - name: load datasets
+#      run: |
+#          az ml data create --file mlops_dataset.yml
+#      working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: run job
       run: |
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
