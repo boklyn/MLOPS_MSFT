@@ -48,9 +48,9 @@ jobs:
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
           source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
           bash -x ../../../run-job.sh job.yml
-      working-directory: cli/jobs/pipelines/mlops
+      working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: validate readme
       run: |
-          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/mlops"
+          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/mslearn-mlops"
       working-directory: infra/bootstrapping
       continue-on-error: false
