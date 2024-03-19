@@ -34,16 +34,19 @@ def get_csvs_df(path):
     return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
 
 
-def split_data(in_df, test_size=0.30, random_state=0):
-    X, y = in_df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values    
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+def split_data(df):
+    X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values    
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
     
     return X_train, X_test, y_train, y_test
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
-
+    
+    # Save the model
+    mlflow.sklearn.log_model(model, "logistic_regression_model")
+    
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
@@ -75,9 +78,6 @@ if __name__ == "__main__":
     # add space in logs
     print("*" * 60)
     print("\n\n")
-
-    # Save the model
-    mlflow.sklearn.log_model(model, "logistic_regression_model")
     
     # End the MLflow run
     mlflow.end_run()

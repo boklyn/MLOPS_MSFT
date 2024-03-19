@@ -3,20 +3,20 @@
 # Any manual changes to this file may cause incorrect behavior.
 # Any manual changes will be overwritten if the code is regenerated.
 
-name: cli-jobs-pipelines-nyc-taxi-pipeline
+name: pipelines-jobs-mslearn-mlops1
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "4 6/12 * * *"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - cli/jobs/pipelines/nyc-taxi/**
-      - infra/bootstrapping/**
-      - .github/workflows/cli-jobs-pipelines-nyc-taxi-pipeline.yml
-      - cli/run-pipeline-jobs.sh
-      - cli/setup.sh
+  #schedule:
+  #  - cron: "4 6/12 * * *"
+  #pull_request:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - cli/jobs/pipelines/nyc-taxi/**
+  #    - infra/bootstrapping/**
+  #    - .github/workflows/mslearn-mlops1.yml
+  #    - cli/run-pipeline-jobs.sh
+  #    - cli/setup.sh
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -43,14 +43,18 @@ jobs:
           bash setup.sh
       working-directory: cli
       continue-on-error: true
+#    - name: load datasets
+#      run: |
+#          az ml data create --file mlops_dataset.yml
+#      working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: run job
       run: |
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
           source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
-          bash -x ../../../run-job.sh pipeline.yml
-      working-directory: cli/jobs/pipelines/nyc-taxi
+          bash -x ../../../run-job.sh job.yml
+      working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: validate readme
       run: |
-          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/nyc-taxi"
+          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/mslearn-mlops"
       working-directory: infra/bootstrapping
       continue-on-error: false
