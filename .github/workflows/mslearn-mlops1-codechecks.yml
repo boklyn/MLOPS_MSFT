@@ -1,4 +1,4 @@
-name: mslearn-mlops1-codechecks
+name: pipelines-codechecks-mslearn-mlops1
 
 on:
   workflow_dispatch:
