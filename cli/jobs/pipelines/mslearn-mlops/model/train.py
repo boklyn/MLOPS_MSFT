@@ -43,7 +43,10 @@ def split_data(df):
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
-
+    
+    # Save the model
+    mlflow.sklearn.log_model(model, "logistic_regression_model")
+    
 def parse_args():
     # setup arg parser
     parser = argparse.ArgumentParser()
@@ -75,9 +78,6 @@ if __name__ == "__main__":
     # add space in logs
     print("*" * 60)
     print("\n\n")
-
-    # Save the model
-    mlflow.sklearn.log_model(model, "logistic_regression_model")
     
     # End the MLflow run
     mlflow.end_run()
