@@ -1,9 +1,13 @@
 $schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
-type: job
-name: create-data-asset-from-csv
-steps:
-  - name: create-data-asset
-    type: azureml:cli
-    command: |
-      az ml data create --name boklyn_mydata --version 1 --type uri_folder --path ./data --description "My CSV data"
+type: pipeline
+
+description: Train model with nyc taxi data
+
+display_name: nyc-taxi-pipeline-example
+experiment_name: nyc-taxi-pipeline-example
+jobs:
+  prep_job:
+      type: azureml:cli
+      command: |
+        az ml data create --name boklyn_mydata --version 1 --type uri_folder --path ./data --description "My CSV data"
 
