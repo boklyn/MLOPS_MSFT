@@ -14,7 +14,7 @@ on:
     paths:
       - cli/jobs/pipelines/nyc-taxi/**
       - infra/bootstrapping/**
-      - .github/workflows/cli-jobs-pipelines-nyc-taxi-pipeline.yml
+      - .github/workflows/mslearn-mlops1.yml
       - cli/run-pipeline-jobs.sh
       - cli/setup.sh
 concurrency:
@@ -47,10 +47,10 @@ jobs:
       run: |
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
           source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
-          bash -x ../../../run-job.sh pipeline.yml
-      working-directory: cli/jobs/pipelines/nyc-taxi
+          bash -x ../../../run-job.sh job.yml
+      working-directory: cli/jobs/pipelines/mlops
     - name: validate readme
       run: |
-          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/nyc-taxi"
+          python check-readme.py "${{ github.workspace }}/cli/jobs/pipelines/mlops"
       working-directory: infra/bootstrapping
       continue-on-error: false
