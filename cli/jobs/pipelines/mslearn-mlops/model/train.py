@@ -79,6 +79,6 @@ if __name__ == "__main__":
 
     # add space in logs
     print("*" * 60)
-    print("\n\n")    
+    print("\n\n")
     # End the MLflow run
-    mlflow.end_run()  
+    mlflow.end_run()
