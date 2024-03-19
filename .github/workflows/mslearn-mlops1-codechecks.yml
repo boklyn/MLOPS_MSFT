@@ -2,7 +2,15 @@ name: pipelines-codechecks-mslearn-mlops1
 
 on:
   workflow_dispatch:
-
+  pull_request:
+    branches:
+      - main
+    paths:
+      - cli/jobs/pipelines/mslearn-mlops/model *.py
+  #    - infra/bootstrapping/**
+  #    - .github/workflows/mslearn-mlops1.yml
+  #    - cli/run-pipeline-jobs.sh
+  #    - cli/setup.sh
 jobs:
   job1:
     name: linting
