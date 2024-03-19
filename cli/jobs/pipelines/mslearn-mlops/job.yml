@@ -1,10 +1,26 @@
-$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
-code: model
-command: >-
-  az ml data create --name boklyn_mydata --version 1 --type uri_folder --path ./data --description "My CSV data"
-inputs:
-  training_data: None
-environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: azureml:boklyncompute
-experiment_name: myfirstexp  
-description: hellooooooooo
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+description: Train model with nyc taxi data
+
+display_name: mslearn-mlops1
+experiment_name: mslearn-mlops1
+jobs:
+  create-data-asset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Azure ML CLI
+        run: pip install azureml-sdk
+
+      - name: Create Data Asset
+        run: |
+          az ml data create --name boklyn_mydata --version 1 --type uri_folder --path ./data --description "My CSV data"
+
