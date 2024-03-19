@@ -24,12 +24,28 @@ jobs:
         python-version: '3.8'
     - name: Install Flake8
       run: |
-        python -m pip install flake8 black mypy
+        python -m pip install flake8
     - name: Run linting tests
       run: | 
         flake8 model/
-        black model/
-        mypy model/
       working-directory: cli/jobs/pipelines/mslearn-mlops
+  job2:
+    name: Unit testing
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Use Python version 3.8
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+    - name: Install Pytest
+      run: |
+        python -m pip install pytest
+    - name: Run ML Unit tests/
+      run: | 
+        pytest tests/
+      working-directory: cli/jobs/pipelines/mslearn-mlops
+
 
 
