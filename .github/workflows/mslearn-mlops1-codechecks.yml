@@ -20,5 +20,6 @@ jobs:
     - name: Run linting tests
       run: | 
         flake8 model/
+      working-directory: cli/jobs/pipelines/mslearn-mlops
 
 
