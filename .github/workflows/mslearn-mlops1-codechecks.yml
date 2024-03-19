@@ -42,7 +42,7 @@ jobs:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
       with:
-        path: "${{ github.workspace }}/requirements.txt"      
+        path: "cli/jobs/pipelines/mslearn-mlops/requirements.txt"      
     - name: Run ML Unit tests/
       run: | 
         pytest tests/
