@@ -3,7 +3,7 @@
 # Any manual changes to this file may cause incorrect behavior.
 # Any manual changes will be overwritten if the code is regenerated.
 
-name: mslearn-mlops1
+name: pipelines-jobs-mslearn-mlops1
 on:
   workflow_dispatch:
   schedule:
