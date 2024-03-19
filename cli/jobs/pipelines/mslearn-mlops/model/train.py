@@ -38,14 +38,12 @@ def split_data(df):
     X = df[['Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure', 'TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree', 'Age']].values # noqa
     y = df['Diabetic'].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0) # noqa
-    
     return X_train, X_test, y_train, y_test
 
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
-    model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
-    
+    model = LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train) # noqa
     # Save the model
     mlflow.sklearn.log_model(model, "logistic_regression_model")
 
