@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - cli/jobs/pipelines/mslearn-mlops/model *.py
+      - cli/jobs/pipelines/mslearn-mlops/model/*.py
   #    - infra/bootstrapping/**
   #    - .github/workflows/mslearn-mlops1.yml
   #    - cli/run-pipeline-jobs.sh
@@ -35,13 +35,14 @@ jobs:
     steps:
     - name: Check out repo
       uses: actions/checkout@main
-    - name: Use Python version 3.8
+    - name: Use Python version 3.11.5
       uses: actions/setup-python@v3
       with:
-        python-version: '3.8'
-    - name: Install Pytest
-      run: |
-        python -m pip install pytest
+        python-version: '3.11.5'
+    - name: Install Python dependencies
+      uses: py-actions/py-dependency-install@v4
+      with:
+        path: "requirements.txt"
     - name: Run ML Unit tests/
       run: | 
         pytest tests/
