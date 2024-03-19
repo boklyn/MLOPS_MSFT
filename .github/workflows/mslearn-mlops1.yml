@@ -55,7 +55,7 @@ jobs:
       run: |
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
           source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
-          bash -x ../../../run-job.sh job.yml
+          bash -x ../../../run-job.sh job_dev.yml
       working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: validate readme
       run: |
@@ -95,7 +95,7 @@ jobs:
       run: |
           source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
           source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
-          bash -x ../../../run-job.sh job.yml
+          bash -x ../../../run-job.sh job_prod.yml
       working-directory: cli/jobs/pipelines/mslearn-mlops
     - name: validate readme
       run: |
