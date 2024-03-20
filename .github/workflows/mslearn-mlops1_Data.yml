@@ -50,7 +50,7 @@ jobs:
     - name: load datasets
       run: |
           git_hash=$(git rev-parse --short "${GITHUB_SHA}")
-          if [ "${{GITHUB_REF_NAME}}" = 'Data_Main' ]; then
+          if [ "${GITHUB_REF_NAME}" = "Data_Main" ]; then
               env = "prod"
           else
               env = "dev"
