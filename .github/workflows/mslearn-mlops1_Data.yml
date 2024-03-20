@@ -51,12 +51,12 @@ jobs:
       run: |
           git_hash=$(git rev-parse --short "${GITHUB_SHA}")
           if [ "${GITHUB_REF_NAME}" = "Data_Main" ]; then
-              env = "prod"
+              env_var = "prod"
           else
-              env = "dev"
+              env_var = "dev"
           fi
-          echo "data_$env"
-          echo "diabetes-$env-folder"
+          echo "data_$env_var"
+          echo "diabetes-$env_var-folder"
           echo "${{ env.MY_ENVIRONMENT }}"
           #az ml data create --version $git_hash --name diabetes-prod-folder --path data_prod --description "hello world"
       working-directory: cli/jobs/pipelines/mslearn-mlops
