@@ -49,5 +49,6 @@ jobs:
       continue-on-error: true
     - name: load datasets
       run: |
-          az ml data create --version 2 --name diabetes-prod-folder --path data_prod --description "hello world"
+          git_hash=$(git rev-parse --short "${GITHUB_SHA}")
+          az ml data create --version git_hash --name diabetes-prod-folder --path data_prod --description "hello world"
       working-directory: cli/jobs/pipelines/mslearn-mlops
