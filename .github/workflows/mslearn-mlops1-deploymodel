@@ -1,0 +1,34 @@
+
+name: Deploy model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deployProd:
+    runs-on: ubuntu-latest
+    environment:
+        name: Prod 
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Set latest ML job name 
+      run: echo "JOB_NAME=$(az ml job list --query '[0].name' --resource-group diabetes-dev-rg --workspace-name aml-diabetes-dev | tr -d '\"')" >> $GITHUB_ENV
+    - name: Echo job name
+      run: |
+          echo "Latest job name is: $JOB_NAME"
+    - name: Set model path
+      run: echo 'PATH_URI="azureml://jobs/${{env.JOB_NAME}}/outputs/artifacts/model"' >> $GITHUB_ENV
+    - name: Echo path URI
+      run: |
+          echo "Model path is: $PATH_URI"
+    - name: Register model from latest job
+      run: az ml model create --name "diabetes-model" --type "mlflow_model" --path ${{env.PATH_URI}} --resource-group diabetes-dev-rg --workspace-name aml-diabetes-dev
+    - name: Create deployment for endpoint
+      run: az ml online-deployment create --name diabetes-model-deployment --endpoint diabetes-prod -f challenge6_model_deployment.yml --resource-group diabetes-dev-rg --workspace-name aml-diabetes-dev --all-traffic
