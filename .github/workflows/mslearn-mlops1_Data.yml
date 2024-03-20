@@ -33,7 +33,20 @@ jobs:
     - name: azure login
       uses: azure/login@v2
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS}}
+        creds: ${{secrets.AZURE_CREDENTIALS}}    
+    - name: bootstrap resources
+      run: |
+          echo '${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}';
+          bash bootstrap.sh
+      working-directory: infra/bootstrapping
+      continue-on-error: false
+    - name: setup-cli
+      run: |
+          source "${{ github.workspace }}/infra/bootstrapping/sdk_helpers.sh";
+          source "${{ github.workspace }}/infra/bootstrapping/init_environment.sh";
+          bash setup.sh
+      working-directory: cli
+      continue-on-error: true
     - name: load datasets
       run: |
           az ml data create --version 2 --name diabetes-prod-folder --path data_prod --description "hello world"
