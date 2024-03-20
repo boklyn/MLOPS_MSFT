@@ -55,8 +55,5 @@ jobs:
           else
               env_var="dev"
           fi
-          echo "data_$env_var"
-          echo "diabetes-$env_var-folder"
-          echo "${{ env.MY_ENVIRONMENT }}"
-          #az ml data create --version $git_hash --name diabetes-prod-folder --path data_prod --description "hello world"
+          az ml data create --version $git_hash --name "diabetes-$env_var-folder" --path "data_$env_var" --description "$env_var data loading files of"
       working-directory: cli/jobs/pipelines/mslearn-mlops
